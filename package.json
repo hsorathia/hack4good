@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "lint": "eslint src",
+    "lint": "eslint '*/**/*.{js,ts,tsx}'",
     "start": "next start",
     "postinstall": "husky install"
   },
