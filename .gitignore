@@ -9,6 +9,8 @@
 /coverage
 
 # next.js
+/.next/
+/out/
 /src/.next/
 /src/out/
 
@@ -32,3 +34,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# yarn
+/.yarn/
