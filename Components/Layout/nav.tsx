@@ -31,9 +31,6 @@ export default function NavBar(props: any): any {
         <Menu.Item key="1">
           <a href="/">Market</a>
         </Menu.Item>
-        <Menu.Item key="2">
-          <a href="/create">Create Post</a>
-        </Menu.Item>
         {!loginState ? (
           <>
             <Menu.Item key="3" style={{ float: 'right' }}>
@@ -44,11 +41,19 @@ export default function NavBar(props: any): any {
             </Menu.Item>
           </>
         ) : (
-          <Menu.Item key="3" style={{ float: 'right' }}>
-            <a href="#" onClick={handleLogout}>
-              Logout
-            </a>
-          </Menu.Item>
+          <>
+            <Menu.Item key="2">
+              <a href="/create">Create Post</a>
+            </Menu.Item>
+            <Menu.Item key="2">
+              <a href="/posts">My Posts</a>
+            </Menu.Item>
+            <Menu.Item key="3" style={{ float: 'right' }}>
+              <a href="#" onClick={handleLogout}>
+                Logout
+              </a>
+            </Menu.Item>
+          </>
         )}
       </Menu>
     </>

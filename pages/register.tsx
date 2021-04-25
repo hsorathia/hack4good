@@ -30,6 +30,7 @@ export default function RegistrationForm() {
   const router = useRouter();
 
   const [form] = Form.useForm();
+  const [loading, setLoading] = React.useState(false);
   const [formState, setFormState] = React.useState({
     email: '',
     nickname: '',
@@ -38,7 +39,7 @@ export default function RegistrationForm() {
   });
 
   const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
+    setLoading(true);
     const { email, nickname, password, phone } = values;
     setFormState({ email, nickname, password, phoneNumber: phone });
   };
@@ -48,6 +49,7 @@ export default function RegistrationForm() {
       const res = '';
       const data = await register(formState, res);
       if (data) {
+        setLoading(false);
         router.push('/login');
       }
       return data;
@@ -132,7 +134,7 @@ export default function RegistrationForm() {
           </Form.Item>
 
           <Form.Item {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit">
+            <Button loading={loading} type="primary" htmlType="submit">
               Register
             </Button>
           </Form.Item>

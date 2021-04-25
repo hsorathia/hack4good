@@ -8,9 +8,13 @@ import { login } from './api/user';
 export default function LoginForm() {
   const router = useRouter();
 
+  const [loading, setLoading] = React.useState(false);
+
   const onFinish = async (values: any) => {
+    setLoading(true);
     const res = await login(values);
     if (res) {
+      setLoading(false);
       router.push('/');
     }
   };
@@ -37,7 +41,7 @@ export default function LoginForm() {
             </a>
           </Form.Item>
           <Form.Item>
-            <Button type="primary" htmlType="submit" className="login-form-button">
+            <Button loading={loading} type="primary" htmlType="submit" className="login-form-button">
               Log in
             </Button>
             {" Don't have an account?"}

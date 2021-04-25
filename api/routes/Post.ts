@@ -24,12 +24,11 @@ router.post('/postItem', async (req, res) => {
 });
 
 router.post('/claimItem', async (req, res) => {
-  const { userID, postID } = req.body;
+  const { postID, claim } = req.body;
 
-  const claimedPost = await Post.findOneAndUpdate({ _id: postID }, { claimed: true }, { new: true }).catch(() => {
+  const claimedPost = await Post.findOneAndUpdate({ _id: postID }, { claimed: claim }, { new: true }).catch(() => {
     return res.status(400).send('Failed to update post');
   });
-  const user = await User.findOneAndUpdate({ _id: userID }, { $addToSet: { claimedPost } }, { new: true });
   if (!claimedPost) return res.status(400).send('Error fetching post');
   return res.status(200).json(claimedPost);
 });
@@ -42,6 +41,16 @@ router.get('/getItems', async (req, res) => {
     itemName: { $regex: new RegExp(`.*${itemName}.*`) },
     condition: { $regex: new RegExp(`${condition}`) },
     claimed,
+  }).catch(() => {
+    return res.status(400).send('Error fetching posts');
+  });
+  return res.status(200).json(posts);
+});
+
+router.post('/getUserItems', async (req, res) => {
+  const email = req.body.email;
+  const posts = await Post.find({
+    email: { $regex: new RegExp(`${email}`) },
   }).catch(() => {
     return res.status(400).send('Error fetching posts');
   });
