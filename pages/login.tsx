@@ -12,7 +12,6 @@ export default function LoginForm() {
     const res = await login(values);
     if (res) {
       router.push('/');
-      window.location.reload(false);
     }
   };
 

@@ -9,7 +9,6 @@ export default function NavBar(props: any): any {
   const [loginState, setLoginState] = useState(false);
 
   function handleLogout() {
-    const router = useRouter();
     localStorage.removeItem('jwt');
     localStorage.removeItem('jwt-expire');
     router.push('/');
@@ -23,7 +22,7 @@ export default function NavBar(props: any): any {
     } else {
       setLoginState(false);
     }
-  }, [loginState]);
+  });
 
   return (
     <>

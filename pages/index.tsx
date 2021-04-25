@@ -4,6 +4,7 @@ import styles from '../styles/Listings.module.css';
 import { Row, Col, Button, Card } from 'antd';
 import ListingModal from '../Components/Layout/listingModal';
 import { getListings } from './api/post';
+import { getUser } from './api/user';
 
 export default function Listings() {
   const [listings, setListings] = useState([
