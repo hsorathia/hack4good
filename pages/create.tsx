@@ -1,14 +1,23 @@
 import React from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { Form, Input, Button, Checkbox, Space, Card } from 'antd';
 import styles from '../styles/CreateListing.module.css';
 import { UserOutlined, LockOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { createListing } from './api/post';
 
 export default function Create() {
+  const router = useRouter();
+
+  const [loading, setLoading] = React.useState(false);
+
   const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
-    values.images.unshift(values.image);
+    setLoading(true);
+    if (values.images) {
+      values.images.unshift(values.image);
+    } else {
+      values.images = [].push(values.image);
+    }
     const data = {
       itemName: values.name,
       itemDescription: values.description,
@@ -20,6 +29,8 @@ export default function Create() {
       image: values.images,
     };
     createListing(data);
+    setLoading(true);
+    router.push('/');
   };
 
   const layout = {
@@ -117,7 +128,9 @@ export default function Create() {
 
           <Form.Item>
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 12 }}>
-              <Button htmlType="submit">Submit</Button>
+              <Button loading={loading} htmlType="submit">
+                Submit
+              </Button>
             </Form.Item>
           </Form.Item>
         </Form>
