@@ -1,7 +1,7 @@
 import React from 'react';
 import { Breadcrumb } from 'antd';
 
-export default function NavBar(props: any) {
+export default function NavBar(props: any): any {
   return (
     <div>
       <Breadcrumb>

@@ -1,6 +1,6 @@
 // import App from "next/app";
 // import type { AppProps /*, AppContext */ } from 'next/app';
-import NavBar from 'Components/Layout/nav';
+import NavBar from '../Components/Layout/nav';
 import type { AppProps } from 'next/app';
 
 function MyApp({ Component, pageProps }: AppProps) {
