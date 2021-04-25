@@ -39,13 +39,13 @@ router.get('/getItems', async (req, res) => {
   const condition = req.body.condition || '';
   const zipCode = req.body.zipCode || '';
   const claimed = req.body.claimed || false;
-  const startDate = req.body.startDate || '2020-04-15T15:47:19.954Z';
-  const endDate = req.body.endDate || new Date();
+  const startDate = req.body.startDate || new Date(0).toISOString();
+  const endDate = req.body.endDate || new Date().toISOString();
   const posts = await Post.find({
     itemName: { $regex: new RegExp(`.*${itemName}.*`) },
     condition: { $regex: new RegExp(`${condition}`) },
     zipCode: { $regex: new RegExp(`${zipCode}.*`) },
-    created_at: {
+    createdAt: {
       $gte: startDate,
       $lt: endDate
     },

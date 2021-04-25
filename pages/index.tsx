@@ -91,6 +91,7 @@ export default function Listings() {
   useEffect(async () => {
     const list = await getListings();
     setListings(list.data);
+    console.log(list.data)
   }, []);
 
   return (
