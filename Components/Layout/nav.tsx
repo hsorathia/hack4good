@@ -45,10 +45,10 @@ export default function NavBar(props: any): any {
             <Menu.Item key="2">
               <a href="/create">Create Post</a>
             </Menu.Item>
-            <Menu.Item key="2">
+            <Menu.Item key="3">
               <a href="/posts">My Posts</a>
             </Menu.Item>
-            <Menu.Item key="3" style={{ float: 'right' }}>
+            <Menu.Item key="4" style={{ float: 'right' }}>
               <a href="#" onClick={handleLogout}>
                 Logout
               </a>

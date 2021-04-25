@@ -22,6 +22,9 @@ const PostSchema = new mongoose.Schema(
     email: {
       type: String,
     },
+    date: {
+      type: String,
+    },
     claimed: {
       type: Boolean,
       required: true,
@@ -34,6 +37,7 @@ const PostSchema = new mongoose.Schema(
     ],
   },
   {
+    timestamps: true,
     collection: 'Posts',
   }
 );

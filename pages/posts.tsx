@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/Posts.module.css';
-import { Row, Col, Button, Card, Dropdown, Menu, Empty } from 'antd';
+import { Row, Col, Button, Card, Dropdown, Menu, Empty, Layout } from 'antd';
 import { DownOutlined, UserOutlined } from '@ant-design/icons';
 import { getUserListings, updateClaim } from './api/post';
 import { getUser } from './api/user';
+import Head from 'next/head';
+const { Content } = Layout;
 
-export default function posts() {
+export default function Posts() {
   const [render, setRender] = useState(false);
   const [listings, setListings] = useState([
     {
@@ -35,7 +37,6 @@ export default function posts() {
         forceRender();
       }
     }
-    console.log(listings);
   }
 
   function dropdownMenu(id, claimed) {
@@ -45,7 +46,7 @@ export default function posts() {
           handleClaimed(id, claimed);
         }}
       >
-        <Menu.Item key="1"> {!claimed ? 'Claimed' : 'Not Claimed'} </Menu.Item>
+        <Menu.Item key={id}> {!claimed ? 'Claimed' : 'Not Claimed'} </Menu.Item>
       </Menu>
     );
   }
@@ -90,8 +91,18 @@ export default function posts() {
   }, []);
 
   return (
-    <div>
-      <Row className={styles.listingsRow}>{cards.length ? cards : <Empty />}</Row>
-    </div>
+    <Layout
+      style={{
+        margin: '24px 0',
+      }}
+      className={styles.container}
+    >
+      <Head>
+        <title>Free Market - My Posts</title>
+      </Head>
+      <Content style={{ padding: '0 50px', minHeight: 280 }} className={styles.container}>
+        <Row className={styles.listingsRow}>{cards.length ? cards : <Empty />}</Row>
+      </Content>
+    </Layout>
   );
 }
