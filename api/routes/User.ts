@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 // eslint-disable-next-line
 const router = express.Router();
 
-router.get('/login', async (req: any, res) => {
+router.get('/login', async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({
       $or: [{ username }, { email: username }]
@@ -33,7 +33,7 @@ router.get('/login', async (req: any, res) => {
   }
 );
 
-router.post('/register', async (req: any, res) => {
+router.post('/register', async (req, res) => {
   const { name, username, password, email } = req.body;
   // see if user exists
   const existingUser = await User.findOne({
