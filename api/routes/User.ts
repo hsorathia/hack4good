@@ -43,18 +43,20 @@ router.post('/register', async (req, res) => {
     return res.status(400).send('User already exists');
   }
   const hashedPassword = await bcrypt.hash(password, 12);
-  const newUser = await User.create({
+  let newUser;
+  await User.create({
     username: nickname,
-    phone: phoneNumber,
     password: hashedPassword,
-    email,
+    phone: phoneNumber,
+    email: email,
+  }).then((res: any) => {
+    // error creating
+    if (!res) return res.status(400).send('Failed to create user');
+    newUser = res;
   }).catch(() => {
     return res.status(400).send('Failed to create user');
   });
-  // error creating
-  if (!newUser) return res.status(400).send('Failed to create user');
-  console.log(newUser);
-  return res.json(newUser);
+  return res.status(200).send(newUser);
 });
 
 module.exports = router;
