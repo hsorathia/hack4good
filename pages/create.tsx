@@ -27,7 +27,7 @@ export default function Create() {
       itemName: values.name,
       itemDescription: values.description,
       zipCode: values.zip,
-      condition: condition,
+      condition,
       phone: user.phone,
       email: user.email,
       date: currentDate,

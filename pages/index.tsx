@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Listings.module.css';
 import { Row, Col, Button, Card, Layout, Empty } from 'antd';
@@ -35,7 +35,9 @@ export default function Listings() {
     date: '',
     claimed: '',
   });
-
+  const handleFilterExpression = React.useCallback((filter) => {
+    console.log(filter);
+  }, []);
   function handleViewListing(cardData) {
     setVisible(true);
     setCurrentData({
@@ -100,7 +102,7 @@ export default function Listings() {
       <Head>
         <title>Free Market - Market</title>
       </Head>
-      <DashboardMenu />
+      <DashboardMenu filterExpression={handleFilterExpression} />
       <Content style={{ padding: '0 24px', minHeight: 280 }}>
         <div className={styles.container}>
           {cards.length > 1 ? (

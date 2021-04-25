@@ -1,24 +1,21 @@
-import { Menu, Layout, Typography, Radio, DatePicker, Input } from 'antd';
+import { Menu, Layout, Typography, Radio, DatePicker, Input, Button } from 'antd';
 import React, { useEffect } from 'react';
 const { Sider } = Layout;
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 
 const { SubMenu } = Menu;
 const { Title } = Typography;
-export default function DashboardMenu() {
+export default function DashboardMenu(props) {
+  const { filterExpression } = props;
   const [itemName, setItemName] = React.useState('');
   const [zipCode, setZipCode] = React.useState('00000');
   const [date, setDate] = React.useState('');
   const [datePeriod, setDatePeriod] = React.useState(1);
-  const [condition, setCondition] = React.useState(1);
+  const [condition, setCondition] = React.useState(0);
 
-  const filterExpression = (information) => {
-    console.log(information);
-  };
-  useEffect(() => {
+  const handleSubmit = (e) => {
     filterExpression({ itemName, zipCode, date, datePeriod, condition });
-  }, [itemName, zipCode, date, datePeriod, condition]);
-
+  };
   const radioStyle = {
     display: 'block',
     height: '30px',
@@ -68,6 +65,11 @@ export default function DashboardMenu() {
                 Old
               </Radio>
             </Radio.Group>
+          </div>
+        </Menu.ItemGroup>
+        <Menu.ItemGroup key="submit" title="Ready to Submit?">
+          <div style={{ paddingLeft: '15px' }}>
+            <Button onClick={handleSubmit}>Filter!</Button>
           </div>
         </Menu.ItemGroup>
       </Menu>
