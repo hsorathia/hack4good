@@ -14,7 +14,27 @@ export default function DashboardMenu(props) {
   const [condition, setCondition] = React.useState(0);
 
   const handleSubmit = (e) => {
-    filterExpression({ itemName, zipCode, date, datePeriod, condition });
+    let dataObj: any = {
+      itemName,
+      zipCode,
+    };
+    if (date) {
+      if (datePeriod === 1) {
+        dataObj.endDate = date;
+      } else {
+        dataObj.startDate = date;
+      }
+    }
+    if (condition === 1) {
+      dataObj.condition = 'New';
+    } else if (condition === 2) {
+      dataObj.condition = 'Good';
+    } else if (condition === 3) {
+      dataObj.condition = 'Used';
+    } else if (condition === 4) {
+      dataObj.condition = 'Old';
+    }
+    filterExpression(dataObj);
   };
   const radioStyle = {
     display: 'block',

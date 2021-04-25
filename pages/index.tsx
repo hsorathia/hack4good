@@ -3,7 +3,7 @@ import Head from 'next/head';
 import styles from '../styles/Listings.module.css';
 import { Row, Col, Button, Card, Layout, Empty } from 'antd';
 import ListingModal from '../Components/Layout/listingModal';
-import { getListings } from './api/post';
+import { getItems, getListings } from './api/post';
 import { getUser } from './api/user';
 import { Container } from 'next/app';
 import DashboardMenu from '../Components/menu';
@@ -35,8 +35,10 @@ export default function Listings() {
     date: '',
     claimed: '',
   });
-  const handleFilterExpression = React.useCallback((filter) => {
+  const handleFilterExpression = React.useCallback(async (filter) => {
     console.log(filter);
+    const response = await getItems(filter);
+    setListings(response.data);
   }, []);
   function handleViewListing(cardData) {
     setVisible(true);
