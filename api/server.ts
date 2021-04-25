@@ -13,11 +13,11 @@ app.use(cookieParser());
 app.use(fileUpload({
     useTempFiles: true
 }));
-const MONGODB_URL="mongodb://localhost:27017/freeMarket";
+const MONGODB_URL = "mongodb://localhost:27017/freeMarket";
 
 // routes
-// app.use('/post', require('./routes/Post'));
-app.use('/user', require('./routes/User'));
+app.use('/', require('./routes/User'));
+app.use('/', require('./routes/Post'));
 
 // connect to mongodb
 mongoose.connect(MONGODB_URL, {
@@ -27,14 +27,14 @@ mongoose.connect(MONGODB_URL, {
     useUnifiedTopology: true
 }, err => {
     if(err) {
-        throw err
-    };
-    console.log("Connected to MongoDB");
+        throw err;
+    }
+    console.log(`Connected to MongoDB at ${MONGODB_URL}`);
 });
 
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
-    console.log('Server is running on port', PORT);
+    console.log(`Server ready at http://localhost:${PORT}`,);
 });
 
