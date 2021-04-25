@@ -33,7 +33,7 @@ router.post('/claimItem', async (req, res) => {
     userID,
     postID
   } = req.body;
-  
+
   const claimedPost = await Post.findOneAndUpdate(
     { _id: postID },
     { claimed: true },
@@ -43,7 +43,7 @@ router.post('/claimItem', async (req, res) => {
   });
   const user = await User.findOneAndUpdate(
     { _id: userID },
-    { $addToSet: { claimedPost: claimedPost } },
+    { $addToSet: { claimedPost } },
     { new: true }
   );
   if (!claimedPost) return res.status(400).send('Error fetching post');
