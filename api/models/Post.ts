@@ -11,22 +11,30 @@ const PostSchema = new mongoose.Schema(
       required: true,
     },
     zipCode: {
-      type: String
+      type: String,
     },
     condition: {
-      type: String
+      type: String,
+    },
+    phone: {
+      type: String,
+    },
+    email: {
+      type: String,
     },
     claimed: {
       type: Boolean,
-      required: true
+      required: true,
     },
-    image: [{
-      // Store Image URL
-      type: String
-    }],
+    image: [
+      {
+        // Store Image URL
+        type: String,
+      },
+    ],
   },
   {
-    collection: 'Posts'
+    collection: 'Posts',
   }
 );
 

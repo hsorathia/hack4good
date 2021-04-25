@@ -1,0 +1,12 @@
+.ListingModal .ListingImageContainer {
+  text-align: center;
+}
+
+.ListingImage {
+  width: 30% !important;
+}
+
+.ContactTag {
+  float: left;
+  font-size: 15px;
+}
