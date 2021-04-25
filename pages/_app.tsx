@@ -13,8 +13,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Header className="header">
           <NavBar />
         </Header>
-        <Content style={{ padding: '0 50px', background: '#f0f2f5' }}>
-          <Component {...pageProps} />
+        <Content style={{ padding: '0 50px' }} className={styles.container}>
+          <div className="site-layout-content">
+            <Component {...pageProps} />
+          </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>Free Market LLC - Hack For Good 2021</Footer>
       </Layout>

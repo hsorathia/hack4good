@@ -1,13 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Listings.module.css';
-import { Row, Col, Button, Card, Layout, Empty } from 'antd';
+import { Row, Col, Button, Card } from 'antd';
 import ListingModal from '../Components/Layout/listingModal';
-import { getItems, getListings } from './api/post';
+import { getListings } from './api/post';
 import { getUser } from './api/user';
-import { Container } from 'next/app';
-import DashboardMenu from '../Components/menu';
-const { Content } = Layout;
 
 export default function Listings() {
   const [listings, setListings] = useState([
@@ -32,14 +29,9 @@ export default function Listings() {
     condition: '',
     email: '',
     phone: '',
-    date: '',
     claimed: '',
   });
-  const handleFilterExpression = React.useCallback(async (filter) => {
-    console.log(filter);
-    const response = await getItems(filter);
-    setListings(response.data);
-  }, []);
+
   function handleViewListing(cardData) {
     setVisible(true);
     setCurrentData({
@@ -50,7 +42,6 @@ export default function Listings() {
       condition: cardData.condition,
       email: cardData.email,
       phone: cardData.phone,
-      date: cardData.date,
       claimed: cardData.email,
     });
   }
@@ -91,33 +82,17 @@ export default function Listings() {
   useEffect(async () => {
     const list = await getListings();
     setListings(list.data);
-    console.log(list.data)
   }, []);
 
   return (
-    <Layout
-      style={{
-        background: '#fff',
-        margin: '24px 0',
-        boxShadow: '8px 8px 12px rgba(186, 186, 186, 0.698)',
-      }}
-    >
+    <div>
       <Head>
         <title>Free Market - Market</title>
       </Head>
-      <DashboardMenu filterExpression={handleFilterExpression} />
-      <Content style={{ padding: '0 24px', minHeight: 280 }}>
-        <div className={styles.container}>
-          {cards.length > 1 ? (
-            <>
-              <Row className={styles.listingsRow}>{cards}</Row>
-              <ListingModal visible={visible} setVisible={setVisible} currentData={currentData} />
-            </>
-          ) : (
-            <Empty />
-          )}
-        </div>
-      </Content>
-    </Layout>
+      <div className={styles.container}>
+        <Row className={styles.listingsRow}>{cards}</Row>
+        <ListingModal visible={visible} setVisible={setVisible} currentData={currentData} />
+      </div>
+    </div>
   );
 }
