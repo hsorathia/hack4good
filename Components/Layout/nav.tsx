@@ -1,17 +1,22 @@
 import React from 'react';
-import { Breadcrumb } from 'antd';
+import { Menu } from 'antd';
 
 export default function NavBar(props: any): any {
+  const [loginState, setLoginState] = React.useState('login');
   return (
-    <div>
-      <Breadcrumb>
-        <Breadcrumb.Item>
-          <a href="/">home</a>
-        </Breadcrumb.Item>
-        <Breadcrumb.Item>
-          <a href="/test">test</a>
-        </Breadcrumb.Item>
-      </Breadcrumb>
-    </div>
+    <>
+      <div className="logo" />
+      <Menu theme="dark" mode="horizontal">
+        <Menu.Item key="1">
+          <a href="/">Market</a>
+        </Menu.Item>
+        <Menu.Item key="2">
+          <a href="/test">Create Post</a>
+        </Menu.Item>
+        <Menu.Item key="3" style={{ float: 'right' }}>
+          {loginState === 'login' ? <a href="/login">Login</a> : <a href="/logout">Logout</a>}
+        </Menu.Item>
+      </Menu>
+    </>
   );
 }

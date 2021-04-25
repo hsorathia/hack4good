@@ -1,14 +1,25 @@
-// import App from "next/app";
 // import type { AppProps /*, AppContext */ } from 'next/app';
 import NavBar from '../Components/Layout/nav';
 import type { AppProps } from 'next/app';
+import { Layout } from 'antd';
+const { Header, Content, Footer } = Layout;
+import 'antd/dist/antd.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div>
-      <NavBar />
-      <Component {...pageProps} />
-    </div>
+    <>
+      <Layout className="layout">
+        <Header className="header">
+          <NavBar />
+        </Header>
+        <Content style={{ padding: '0 50px' }}>
+          <div className="site-layout-content">
+            <Component {...pageProps} />
+          </div>
+        </Content>
+        <Footer style={{ textAlign: 'center' }}>Free Market LLC - Hack For Good 2021</Footer>
+      </Layout>
+    </>
   );
 }
 
