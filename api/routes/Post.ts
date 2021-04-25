@@ -5,7 +5,7 @@ const { Post } = require('../models/Post');
 const router = express.Router();
 
 router.post('/postItem', async (req, res) => {
-  const { userID, itemName, itemDescription, zipCode, condition, phone, email, image } = req.body;
+  const { userID, itemName, itemDescription, zipCode, condition, phone, email, date, image } = req.body;
   const newPost = await Post.create({
     itemName,
     itemDescription,
@@ -13,6 +13,7 @@ router.post('/postItem', async (req, res) => {
     condition,
     phone,
     email,
+    date,
     claimed: false,
     image,
   }).catch(() => {

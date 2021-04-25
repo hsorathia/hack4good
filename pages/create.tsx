@@ -1,15 +1,18 @@
 import React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Form, Input, Button, Checkbox, Space, Card } from 'antd';
+import { Form, Input, Button, Checkbox, Space, Card, Dropdown, Menu } from 'antd';
 import styles from '../styles/CreateListing.module.css';
-import { UserOutlined, LockOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { UserOutlined, LockOutlined, MinusCircleOutlined, PlusOutlined, DownOutlined } from '@ant-design/icons';
 import { createListing } from './api/post';
+import { getUser } from './api/user';
 
 export default function Create() {
   const router = useRouter();
 
   const [loading, setLoading] = React.useState(false);
+  const [condition, setCondition] = React.useState('New');
+  const user = getUser();
 
   const onFinish = (values: any) => {
     setLoading(true);
@@ -18,13 +21,15 @@ export default function Create() {
     } else {
       values.images = [].push(values.image);
     }
+    const currentDate = new Date().toLocaleDateString();
     const data = {
       itemName: values.name,
       itemDescription: values.description,
       zipCode: values.zip,
-      condition: values.condition,
-      phone: values.phone,
-      email: values.email,
+      condition: condition,
+      phone: user.phone,
+      email: user.email,
+      date: currentDate,
       claimed: false,
       image: values.images,
     };
@@ -32,6 +37,28 @@ export default function Create() {
     setLoading(true);
     router.push('/');
   };
+
+  function dropdownMenu() {
+    const menuItems = ['New', 'Good', 'Used', 'Old'];
+    return (
+      <Menu>
+        {menuItems.map((item, itr) => {
+          if (item !== condition) {
+            return (
+              <Menu.Item
+                key={itr}
+                onClick={() => {
+                  setCondition(item);
+                }}
+              >
+                {item}
+              </Menu.Item>
+            );
+          }
+        })}
+      </Menu>
+    );
+  }
 
   const layout = {
     labelCol: { span: 4 },
@@ -68,18 +95,12 @@ export default function Create() {
           <Form.Item name="zip" label="Zip Code" rules={[{ required: true, message: 'Please input your Zip Code!' }]}>
             <Input placeholder="Zip Code" />
           </Form.Item>
-          <Form.Item
-            name="condition"
-            label="Condition"
-            rules={[{ required: true, message: 'Please input your Item Condition!' }]}
-          >
-            <Input placeholder="New, Old, Used, etc" />
-          </Form.Item>
-          <Form.Item name="phone" label="Phone" rules={[{ required: true, message: 'Please input your Phone!' }]}>
-            <Input placeholder="Phone Number" />
-          </Form.Item>
-          <Form.Item name="email" label="Email" rules={[{ required: true, message: 'Please input your Email!' }]}>
-            <Input placeholder="Email Address" />
+          <Form.Item name="condition" label="Condition">
+            <Dropdown overlay={dropdownMenu}>
+              <Button>
+                {condition} <DownOutlined />
+              </Button>
+            </Dropdown>
           </Form.Item>
           <Form.Item
             name="description"

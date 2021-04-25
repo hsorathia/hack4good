@@ -22,6 +22,9 @@ const PostSchema = new mongoose.Schema(
     email: {
       type: String,
     },
+    date: {
+      type: String,
+    },
     claimed: {
       type: Boolean,
       required: true,

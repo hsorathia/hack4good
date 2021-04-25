@@ -37,7 +37,6 @@ export default function Posts() {
         forceRender();
       }
     }
-    console.log(listings);
   }
 
   function dropdownMenu(id, claimed) {
@@ -47,7 +46,7 @@ export default function Posts() {
           handleClaimed(id, claimed);
         }}
       >
-        <Menu.Item key="1"> {!claimed ? 'Claimed' : 'Not Claimed'} </Menu.Item>
+        <Menu.Item key={id}> {!claimed ? 'Claimed' : 'Not Claimed'} </Menu.Item>
       </Menu>
     );
   }
