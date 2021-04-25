@@ -9,7 +9,6 @@ const startDatabase = () => {
     autoIndex: true,
     poolSize: 50,
     bufferMaxEntries: 0,
-    keepAlive: 120,
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
