@@ -20,11 +20,10 @@ const PostSchema = new mongoose.Schema(
       type: Boolean,
       required: true
     },
-    image: {
+    image: [{
       // Store Image URL
       type: String
-    },
-
+    }],
   },
   {
     collection: 'Posts'
