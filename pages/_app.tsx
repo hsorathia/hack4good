@@ -1,9 +1,15 @@
 // import App from "next/app";
 // import type { AppProps /*, AppContext */ } from 'next/app';
+import NavBar from 'Components/Layout/nav';
 import type { AppProps } from 'next/app';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <div>
+      <NavBar />
+      <Component {...pageProps} />
+    </div>
+  );
 }
 
 // Only uncomment this method if you have blocking data requirements for
