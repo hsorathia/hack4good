@@ -5,53 +5,52 @@ const bcrypt = require('bcrypt');
 // eslint-disable-next-line
 const router = express.Router();
 
-router.get('/login', async (req, res) => {
-    const { username, password } = req.body;
-    const user = await User.findOne({
-      $or: [{ username }, { email: username }]
-    });
-    // user doesn't exist
-    if (!user) return res.status(400).send('Invalid user');
-    const loggedIn = await bcrypt.compare(password, user.password);
-    // Password incorrect
-    if (!loggedIn) return res.status(400).send('Incorrect password');
+router.post('/login', async (req, res) => {
+  const { username, password } = req.body.data.req;
+  console.log(username, password);
+  const user = await User.findOne({
+    $or: [{ username }, { email: username }],
+  });
+  // user doesn't exist
+  if (!user) return res.status(400).send('Invalid user');
+  const loggedIn = await bcrypt.compare(password, user.password);
+  // Password incorrect
+  if (!loggedIn) return res.status(400).send('Incorrect password');
 
-    // Log user in
-    const token = jwt.sign({
+  // Log user in
+  const token = jwt.sign(
+    {
       userID: user.id,
       username: user.username,
-      email: user.email
+      email: user.email,
     },
     'averysupersecretkey',
     { expiresIn: '1h' }
-    );
-    return {
-      userID: user.id,
-      token,
-      tokenExpiration: 1
-    };
-  }
-);
+  );
+  return res.json({
+    token,
+    tokenExpiration: 1,
+  });
+});
 
 router.post('/register', async (req, res) => {
-  const { name, username, password, email } = req.body;
+  const { nickname, phoneNumber, password, email } = req.body.data.req;
+  console.log(nickname, phoneNumber, password, email);
   // see if user exists
   const existingUser = await User.findOne({
-    $or: [{ username }, { email }]
+    $or: [{ nickname }, { email }],
   });
   if (existingUser) {
     // User already created
     return res.status(400).send('User already exists');
   }
   const hashedPassword = await bcrypt.hash(password, 12);
-  const newUser = await User.create(
-    {
-      name,
-      username,
-      password: hashedPassword,
-      email
-    }
-  ).catch(() => {
+  const newUser = await User.create({
+    username: nickname,
+    phone: phoneNumber,
+    password: hashedPassword,
+    email,
+  }).catch(() => {
     return res.status(400).send('Failed to create user');
   });
   // error creating

@@ -2,8 +2,9 @@
 import NavBar from '../Components/Layout/nav';
 import type { AppProps } from 'next/app';
 import { Layout } from 'antd';
-const { Header, Content, Footer } = Layout;
 import 'antd/dist/antd.css';
+import styles from '../styles/Home.module.css';
+const { Header, Content, Footer } = Layout;
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -12,7 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Header className="header">
           <NavBar />
         </Header>
-        <Content style={{ padding: '0 50px' }}>
+        <Content style={{ padding: '0 50px' }} className={styles.container}>
           <div className="site-layout-content">
             <Component {...pageProps} />
           </div>
