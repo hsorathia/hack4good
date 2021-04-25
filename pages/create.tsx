@@ -12,9 +12,10 @@ export default function Create() {
 
   const [loading, setLoading] = React.useState(false);
   const [condition, setCondition] = React.useState('New');
-  const user = getUser();
 
   const onFinish = (values: any) => {
+    const user = getUser();
+    console.log(user);
     setLoading(true);
     if (values.images) {
       values.images.unshift(values.image);

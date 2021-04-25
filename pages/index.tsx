@@ -32,6 +32,7 @@ export default function Listings() {
     condition: '',
     email: '',
     phone: '',
+    date: '',
     claimed: '',
   });
 
@@ -45,6 +46,7 @@ export default function Listings() {
       condition: cardData.condition,
       email: cardData.email,
       phone: cardData.phone,
+      date: cardData.date,
       claimed: cardData.email,
     });
   }
