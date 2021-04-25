@@ -1,0 +1,57 @@
+.container {
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.listingsRow {
+  width: 90%;
+}
+
+.listingCard {
+  height: 600px;
+  width: 350px;
+  margin-bottom: 30px;
+  box-shadow: 2px 4px 10px rgba(185, 185, 185, 0.698);
+  margin: 30px auto;
+}
+
+.listingCard:hover {
+  box-shadow: 8px 8px 12px rgba(185, 185, 185, 0.698);
+}
+
+.listingCard img {
+  object-fit: cover;
+  height: 300px;
+}
+
+.listingCardBody button {
+  width: 100%;
+}
+
+@media only screen and (max-width: 1340px) {
+  .listingCard {
+    width: 250px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .listingCard {
+    width: 350px;
+  }
+}
+
+@media only screen and (max-width: 970px) {
+  .listingCard {
+    width: 250px;
+  }
+}
+
+@media only screen and (max-width: 765px) {
+  .listingCard {
+    width: 250px;
+  }
+}
