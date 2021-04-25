@@ -84,9 +84,14 @@ export default function Listings() {
   }, []);
 
   return (
-    <div className={styles.container}>
-      <Row className={styles.listingsRow}>{cards}</Row>
-      <ListingModal visible={visible} setVisible={setVisible} currentData={currentData} />
+    <div>
+      <Head>
+        <title>Free Market - Market</title>
+      </Head>
+      <div className={styles.container}>
+        <Row className={styles.listingsRow}>{cards}</Row>
+        <ListingModal visible={visible} setVisible={setVisible} currentData={currentData} />
+      </div>
     </div>
   );
 }

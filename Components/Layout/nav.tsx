@@ -11,7 +11,7 @@ export default function NavBar(props: any): any {
           <a href="/">Market</a>
         </Menu.Item>
         <Menu.Item key="2">
-          <a href="/test">Create Post</a>
+          <a href="/create">Create Post</a>
         </Menu.Item>
         <Menu.Item key="3" style={{ float: 'right' }}>
           {loginState === 'login' ? <a href="/login">Login</a> : <a href="/logout">Logout</a>}
