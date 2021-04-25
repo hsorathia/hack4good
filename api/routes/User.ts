@@ -22,7 +22,6 @@ router.post('/login', async (req, res) => {
       userID: user.id,
       username: user.username,
       email: user.email,
-      phone: user.phone,
     },
     'averysupersecretkey',
     { expiresIn: '1h' }
